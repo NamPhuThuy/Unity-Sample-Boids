@@ -10,18 +10,18 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/NamPhuThuy/Unity-Initial">
+  <a href="https://github.com/NamPhuThuy/Unity-Sample-Boids">
     <img src="images/avatar.png" alt="Logo" width="200">
   </a>
 
 <h3 align="center">README-Template</h3>
 
   <p align="center">
-    <a href="https://github.com/NamPhuThuy/Unity-Initial">View Demo</a>
+    <a href="https://github.com/NamPhuThuy/Unity-Sample-Boids">View Demo</a>
     ·
-    <a href="https://github.com/NamPhuThuy/Unity-Initial/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/NamPhuThuy/Unity-Sample-Boids/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/NamPhuThuy/Unity-Initial/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/NamPhuThuy/Unity-Sample-Boids/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -101,14 +101,14 @@ Some useful examples of how this project can be used (add screenshots, code exam
     - [ ] Chinese
     - [ ] Spanish
 
-See the [open issues](https://github.com/NamPhuThuy/Unity-Initial/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/NamPhuThuy/Unity-Sample-Boids/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Top contributors:
 
-<a href="https://github.com/NamPhuThuy/TN006-Unity-Auto-Cat/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NamPhuThuy/TN006-Unity-Auto-Cat" alt="contrib.rocks image" />
+<a href="https://github.com/NamPhuThuy/Unity-Sample-Boids/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=NamPhuThuy/Unity-Sample-Boids" alt="contrib.rocks image" />
 </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -134,16 +134,16 @@ Helpful resources, credits
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/NamPhuThuy/Unity-Initial.svg?style=for-the-badge
-[contributors-url]: https://github.com/NamPhuThuy/Unity-Initial/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/NamPhuThuy/Unity-Initial.svg?style=for-the-badge
-[forks-url]: https://github.com/NamPhuThuy/Unity-Initial/network/members
-[stars-shield]: https://img.shields.io/github/stars/NamPhuThuy/Unity-Initial.svg?style=for-the-badge
-[stars-url]: https://github.com/NamPhuThuy/Unity-Initial/stargazers
-[issues-shield]: https://img.shields.io/github/issues/NamPhuThuy/Unity-Initial.svg?style=for-the-badge
-[issues-url]: https://github.com/NamPhuThuy/Unity-Initial/issues
-[license-shield]: https://img.shields.io/github/license/NamPhuThuy/Unity-Initial.svg?style=for-the-badge
-[license-url]: https://github.com/NamPhuThuy/Unity-Initial/blob/main/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/NamPhuThuy/Unity-Sample-Boids.svg?style=for-the-badge
+[contributors-url]: https://github.com/NamPhuThuy/Unity-Sample-Boids/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/NamPhuThuy/Unity-Sample-Boids.svg?style=for-the-badge
+[forks-url]: https://github.com/NamPhuThuy/Unity-Sample-Boids/network/members
+[stars-shield]: https://img.shields.io/github/stars/NamPhuThuy/Unity-Sample-Boids.svg?style=for-the-badge
+[stars-url]: https://github.com/NamPhuThuy/Unity-Sample-Boids/stargazers
+[issues-shield]: https://img.shields.io/github/issues/NamPhuThuy/Unity-Sample-Boids.svg?style=for-the-badge
+[issues-url]: https://github.com/NamPhuThuy/Unity-Sample-Boids/issues
+[license-shield]: https://img.shields.io/github/license/NamPhuThuy/Unity-Sample-Boids.svg?style=for-the-badge
+[license-url]: https://github.com/NamPhuThuy/Unity-Sample-Boids/blob/main/LICENSE
 
 <!-- Contact -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
