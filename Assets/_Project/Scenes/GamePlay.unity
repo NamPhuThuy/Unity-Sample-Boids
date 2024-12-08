@@ -409,6 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1824447802}
+  - component: {fileID: 1824447803}
   m_Layer: 0
   m_Name: BoidSpawner
   m_TagString: Untagged
@@ -431,6 +432,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1824447803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824447801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f827c8b6bd4877c40819f7a62e7692a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boidPrefab: {fileID: 4200113823411855434, guid: a5a8192f8ecd7934abd0a61ced8dd40b, type: 3}
 --- !u!1001 &4464121351687499965
 PrefabInstance:
   m_ObjectHideFlags: 0

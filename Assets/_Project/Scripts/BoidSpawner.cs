@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoidSpawner : MonoBehaviour
+public class BoidSpawner : Singleton<BoidSpawner>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject _boidPrefab;
+    
+    public void SpawnBoids(int num)
     {
-        
+        StartCoroutine(SpawnBoid(num));
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator SpawnBoid(int num)
     {
-        
+        for (int i = 0; i < num; i++)
+        {
+            yield return null;
+            Instantiate(_boidPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

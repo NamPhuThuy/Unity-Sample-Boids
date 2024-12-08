@@ -16,8 +16,9 @@ public class Boid : MonoBehaviour
         print(Mathf.Atan(1f));
         print(Mathf.Rad2Deg * Mathf.Atan(1f));
         _direction = GenerateRandomVector();
-        HandleRotation();
+        // _direction = new Vector2(0f, 1f);
         
+        HandleRotation();
         StartCoroutine(ChangeSpeed());
     }
 
@@ -46,7 +47,6 @@ public class Boid : MonoBehaviour
     private void Update()
     {
         transform.Translate(_direction * (Time.deltaTime * _speed));
-        
     }
 
     private void HandleRotation()
@@ -54,8 +54,20 @@ public class Boid : MonoBehaviour
         float tanVal = _direction.y / _direction.x;
         float degree = Mathf.Atan(tanVal) * Mathf.Rad2Deg;
         float degreeBuffer = -90f;
+        float degreeBuffer_2 = 90f;
         // transform.localRotation.z = degree;
-        _visual.transform.rotation = Quaternion.Euler(new Vector3(_visual.transform.rotation.x, _visual.transform.rotation.y, degree + degreeBuffer));
+
+        if (_direction.x >= 0f)
+        {
+            Debug.Log("TNam - rotate case 1: -90f");
+            _visual.transform.rotation = Quaternion.Euler(new Vector3(_visual.transform.rotation.x, _visual.transform.rotation.y, degree + degreeBuffer));    
+        }
+        else if (_direction.x < 0f)
+        {
+            Debug.Log("TNam - rotate case 2: +90f");
+            _visual.transform.rotation = Quaternion.Euler(new Vector3(_visual.transform.rotation.x, _visual.transform.rotation.y, degree + degreeBuffer_2));
+        }
+        
     }
 
     #region Visualize
