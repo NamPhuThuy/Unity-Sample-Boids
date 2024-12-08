@@ -14,8 +14,7 @@
     <img src="images/avatar.png" alt="Logo" width="200">
   </a>
 
-<h3 align="center">README-Template</h3>
-
+<h3 align="center">Boid simulation</h3>
   <p align="center">
     <a href="https://github.com/NamPhuThuy/Unity-Sample-Boids">View Demo</a>
     ·
@@ -25,91 +24,62 @@
   </p>
 </div>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage-examples">Usage examples</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
-
+[Boids Pseudocode](#boids-pseudocode)  
+[Todo List](#todo)  
+[Contact](#contact)  
+[Acknowledgments](#acknowledgments)
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Boids Pseudocode
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+The boids program has the following structure:
+```
+initialise_positions()
+	    
+LOOP
+    draw_boids()
+    move_all_boids_to_new_positions()
+END LOOP
+```
 
-This is the short description about the project. Technologies, tools be used 
- :smile:
+```
+PROCEDURE move_all_boids_to_new_positions()
+
+    Vector v1, v2, v3
+    Boid b
+
+    FOR EACH BOID b
+        v1 = rule1(b)
+        v2 = rule2(b)
+        v3 = rule3(b)
+
+        b.velocity = b.velocity + v1 + v2 + v3
+        b.position = b.position + b.velocity
+    END
+
+END PROCEDURE
+```
+
+### Rule 1: Cohesion - boids try to fly towards the average position of neighbouring boids.
+
+The average position of n-1 boids ():
+```
+pcJ = (b1.position + b2.position + ... + bJ-1.position + bJ+1.position + ... + bN.position) / (N-1)
+```
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-### Built With
-Major frameworks/libraries used in project
-* [![Unity][Unity.com]][Unity-url]
-* [![CSharp][CSharp.com]][CSharp-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-Instructions to setup this project locally.
-
-### Prerequisites
-
-### Installation
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage examples
-
-Some useful examples of how this project can be used (add screenshots, code examples, demo works, resource links..)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
-## Roadmap
+## Todo
 
 - [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+
 
 See the [open issues](https://github.com/NamPhuThuy/Unity-Sample-Boids/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Top contributors:
-
-<a href="https://github.com/NamPhuThuy/Unity-Sample-Boids/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=NamPhuThuy/Unity-Sample-Boids" alt="contrib.rocks image" />
-</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
