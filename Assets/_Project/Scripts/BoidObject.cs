@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -14,51 +15,33 @@ namespace _Project.Scripts
     {
         [Header("Simple movement")]
         [SerializeField] public float _speed = 1f;
-        [SerializeField] public Vector2 _direction;
+        [SerializeField] public Vector2 _velocity;
         [SerializeField] private GameObject _visual;
         [SerializeField] private Transform _transform;
         
+        [FormerlySerializedAs("_cohensionList")]
         [Header("Boid Simulation")]
-        [SerializeField] private List<GameObject> _cohensionList = new List<GameObject>();
+        [SerializeField] private List<BoidObject> _neighborList = new List<BoidObject>();
         [SerializeField] private List<GameObject> _separationList = new List<GameObject>();
-        [SerializeField] private List<BoidObject> _alignmentList = new List<BoidObject>();
         
         
-        private float _cohensionRange = 2.8f;
+        private float _neighborRange = 2.8f;
         private float _separationRange = 0.7f;
-        private float _alignmentRange = 1.5f;
         
         void Start()
         {
             _transform = GetComponent<Transform>();
             
-            _direction = Helpers.Instance.GenerateRandomVector();
+            _velocity = Helpers.Instance.GenerateRandomVector();
         
             HandleRotation();
             
             StartCoroutine(ChangeDirection());
         }
-        
-        private void Update()
-        {
-            
-           // Move();
-            // CheckNeighbor();
-            //
-            //
-            //
-            // Vector2 v1 = CohesionCalculate();
-            // Vector2 v2 = SeparationCalculate();
-            // Vector2 v3 = AlignmentCalculate();
-            //
-            // _direction = (_direction + v1 + v2 + v3).normalized;
-            //
-            // HandleRotation();
-        }
 
         public void Move()
         {
-            transform.Translate(_direction * (Time.deltaTime * _speed));
+            transform.Translate(_velocity * (Time.deltaTime * _speed));
         }
         
         public IEnumerator ChangeDirection()
@@ -68,10 +51,10 @@ namespace _Project.Scripts
                 yield return new WaitForSeconds(.75f);
 
                 Vector2 tmp = Helpers.Instance.GenerateRandomVector();
-                _direction.x = _direction.x * 2f + tmp.x;
-                _direction.y = _direction.y * 2f + tmp.y;
+                _velocity.x = _velocity.x * 2f + tmp.x;
+                _velocity.y = _velocity.y * 2f + tmp.y;
 
-                _direction = _direction.normalized;
+                _velocity = _velocity.normalized;
                 HandleRotation();
             }
         }
@@ -86,16 +69,16 @@ namespace _Project.Scripts
                 if (boid.gameObject == gameObject) return;
 
                 float dist = Vector2.Distance(transform.position, boid.transform.position); 
-                if (dist <= _cohensionRange)
+                if (dist <= _neighborRange)
                 {
                     // if (!_neightborsList.Contains(boid)) _neightborsList.Add(boid);
                 
-                    if (!_cohensionList.Contains(boid.gameObject)) _cohensionList.Add(boid.gameObject);
+                    if (!_neighborList.Contains(boid)) _neighborList.Add(boid);
                 }
                 else
                 {
                     // if (_neightborsList.Contains(boid)) _neightborsList.Remove(boid);
-                    if (_cohensionList.Contains(boid.gameObject)) _cohensionList.Remove(boid.gameObject);
+                    if (_neighborList.Contains(boid)) _neighborList.Remove(boid);
                 }
 
                 if (dist <= _separationRange)
@@ -105,15 +88,6 @@ namespace _Project.Scripts
                 else
                 {
                     if (_separationList.Contains(boid.gameObject)) _separationList.Remove(boid.gameObject);
-                }
-
-                if (dist <= _alignmentRange)
-                {
-                    if (!_alignmentList.Contains(boid)) _alignmentList.Add(boid);
-                }
-                else
-                {
-                    if (_alignmentList.Contains(boid)) _alignmentList.Remove(boid);
                 }
             }
         }
@@ -144,10 +118,14 @@ namespace _Project.Scripts
                 if (boid.gameObject == gameObject) continue;
                 float dist = Vector2.Distance(currentPosi, boid._transform.position);
 
-                if (dist < _cohensionRange)
+                if (dist < _neighborRange)
                 {
                     numCohesion++;
                     sumCohesion += (Vector2) boid._transform.position;
+                    
+                    
+                    numAlighnment++;
+                    sumAlignment += boid._velocity;
                 }
 
                 if (dist < _separationRange)
@@ -155,13 +133,6 @@ namespace _Project.Scripts
                     numSeparation++;
                     sumSeparation += (currentPosi - (Vector2) boid._transform.position);
                 }
-
-                if (dist < _alignmentRange)
-                {
-                    numAlighnment++;
-                    sumAlignment += boid._direction;
-                }
-
             }
 
             cohesionRes = (sumCohesion / numCohesion) - currentPosi;
@@ -176,18 +147,18 @@ namespace _Project.Scripts
         public Vector2 CohesionCalculate()
         {
             Vector2 res = Vector2.zero;
-            if (_cohensionList.Count <= 0) return res;
+            if (_neighborList.Count <= 0) return res;
         
             Vector2 sum = Vector2.zero;
-            sum += (Vector2) transform.position;
+            // sum += (Vector2) transform.position;
             
-            foreach (GameObject boid in _cohensionList)
+            foreach (BoidObject boid in _neighborList)
             {
-                sum += (Vector2) boid.transform.position;
+                sum += (Vector2) boid._transform.position;
             }
-
-            Vector2 centerPoint = sum / (_cohensionList.Count + 1);
-            res = (centerPoint - (Vector2) transform.position).normalized;
+            
+            // sum / _cohensionList.Count: the center point of neighbor boids
+            res = (sum / _neighborList.Count) - (Vector2) transform.position;
         
             return res;
         }
@@ -196,14 +167,11 @@ namespace _Project.Scripts
         {
             Vector2 res = Vector2.zero;
             if (_separationList.Count <= 0) return res;
-        
-            Vector2 sum = new Vector2(0f, 0f);
+            
             foreach (GameObject boid in _separationList)
             {
-                sum += (Vector2) (transform.position - boid.transform.position);
+                res += (Vector2) (transform.position - boid.transform.position).normalized;
             }
-
-            res = sum.normalized;
 
             return res;
         }
@@ -211,14 +179,14 @@ namespace _Project.Scripts
         public Vector2 AlignmentCalculate()
         {
             Vector2 res = Vector2.zero;
-            Vector2 sum = new Vector2(0f, 0f);
+            if (_neighborList.Count <= 0) return res;
             
-            foreach (BoidObject boid in _alignmentList)
+            foreach (BoidObject boid in _neighborList)
             {
-                sum += boid._direction;
+                res += boid._velocity;
             }
 
-            res = sum / _alignmentList.Count;
+            res /= _neighborList.Count;
             return res;
         }
 
@@ -232,7 +200,7 @@ namespace _Project.Scripts
             Gizmos.color = Color.cyan;
 
             // Draw the line from startPoint in the specified direction
-            Gizmos.DrawLine(transform.position, (Vector2)transform.position + _direction);
+            Gizmos.DrawLine(transform.position, (Vector2)transform.position + _velocity);
         }
         
         /// <summary>
@@ -240,20 +208,18 @@ namespace _Project.Scripts
         /// </summary>
         public void HandleRotation()
         {
-            float tanVal = _direction.y / _direction.x;
+            float tanVal = _velocity.y / _velocity.x;
             float degree = Mathf.Atan(tanVal) * Mathf.Rad2Deg;
             float degreeBuffer = -90f;
             float degreeBuffer_2 = 90f;
             // transform.localRotation.z = degree;
 
-            if (_direction.x >= 0f)
+            if (_velocity.x >= 0f)
             {
-                Debug.Log("TNam - rotate case 1: -90f");
                 _visual.transform.rotation = Quaternion.Euler(new Vector3(_visual.transform.rotation.x, _visual.transform.rotation.y, degree + degreeBuffer));    
             }
-            else if (_direction.x < 0f)
+            else if (_velocity.x < 0f)
             {
-                Debug.Log("TNam - rotate case 2: +90f");
                 _visual.transform.rotation = Quaternion.Euler(new Vector3(_visual.transform.rotation.x, _visual.transform.rotation.y, degree + degreeBuffer_2));
             }
         

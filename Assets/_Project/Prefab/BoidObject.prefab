@@ -45,9 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4281d433a048e6ac248bd24c941544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 3
   _direction: {x: 0, y: 0}
   _visual: {fileID: 4257106079376736691}
+  _transform: {fileID: 5516343771425400922}
+  _cohensionList: []
+  _separationList: []
 --- !u!1 &4257106079376736691
 GameObject:
   m_ObjectHideFlags: 0

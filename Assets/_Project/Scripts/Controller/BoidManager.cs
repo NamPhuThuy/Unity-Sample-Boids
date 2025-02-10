@@ -8,13 +8,27 @@ using Random = UnityEngine.Random;
 
 public class BoidManager : Singleton<BoidManager>
 {
+    [Header("Boid information")]
     [SerializeField] private GameObject _boidPrefab;
+    [SerializeField] private float _maxSpeed;
     public List<BoidObject> _boidsList;
+    public int boidsToSpawn = 0;
 
+    
+    
     [Header("Boid Simulation")] 
     [SerializeField] private bool _useCohesion = true;
     [SerializeField] private bool _useSeparation = true;
     [SerializeField] private bool _useAlignment = true;
+
+    [SerializeField] public int _forceCohesion = 10;
+    [SerializeField] public int _forceSeparation = 80;
+    [SerializeField] public int _forceAlignment = 10;
+
+    private void Start()
+    {
+        Debug.Log($"num: {60 / 100f}");
+    }
 
     public void SpawnBoids(int num)
     {
@@ -53,21 +67,17 @@ public class BoidManager : Singleton<BoidManager>
         {
             boid.Move();
             boid.CheckNeighbor();
-
-            Vector2 v1 = Vector2.zero;
-            Vector2 v2 = Vector2.zero;
-            Vector2 v3 = Vector2.zero;
             
             if (_useCohesion)
-                v1 = boid.CohesionCalculate();
+                boid._velocity += boid.CohesionCalculate() * (_forceCohesion/100f);
             
             if (_useSeparation)
-                v2 = boid.SeparationCalculate();
+                boid._velocity += boid.SeparationCalculate() * (_forceSeparation/100f);
             
             if (_useAlignment)
-                v3 = boid.AlignmentCalculate();
+                boid._velocity += boid.AlignmentCalculate() * (_forceAlignment/100f);
             
-            boid._direction = (boid._direction + v1 + v2 + v3).normalized;
+            boid._velocity = boid._velocity.normalized;
             boid.HandleRotation();
         }
     }

@@ -21,12 +21,22 @@ public class BoidManagerEditor : Editor
 
         // Add some space before the custom button
         EditorGUILayout.Space();
-
-        // Create a custom button
-        if (GUILayout.Button("Spawn 1 boid")) myScript.SpawnBoids(1);
-        if (GUILayout.Button("Spawn 3 boid")) myScript.SpawnBoids(3);
-        if (GUILayout.Button("Spawn 7 boid")) myScript.SpawnBoids(7);
         
+        // myScript.boidsToSpawn = EditorGUILayout.IntSlider("Cohesion force applied", myScript._forceCohesion, 1, 100);
+        // myScript.boidsToSpawn = EditorGUILayout.IntSlider("Separation force applied", myScript._forceSeparation, 1, 100);
+        // myScript.boidsToSpawn = EditorGUILayout.IntSlider("Alignment force applied", myScript._forceAlignment, 1, 100);
+        
+        
+        // myScript.boidsToSpawn = EditorGUILayout.IntField("Boids to Spawn", myScript.boidsToSpawn);
+        // myScript.boidsToSpawn = Mathf.Max(0, myScript.boidsToSpawn);
+        
+        if (GUILayout.Button("Spawn Boids")) myScript.SpawnBoids(myScript.boidsToSpawn);
+        
+        /*EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Spawn 10 boids")) myScript.SpawnBoids(10);
+        if (GUILayout.Button("Spawn 50 boids")) myScript.SpawnBoids(50);
+        if (GUILayout.Button("Spawn 100 boids")) myScript.SpawnBoids(100);
+        EditorGUILayout.EndHorizontal();*/
 
         // Optional: Colored or styled button
         if (GUILayout.Button("Danger Button", GUILayout.Height(30)))

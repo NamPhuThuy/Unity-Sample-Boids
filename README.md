@@ -72,6 +72,9 @@ pcJ = (b1.position + b2.position + ... + bJ-1.position + bJ+1.position + ... + b
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Rendering Optimize
+![img.png](img.png)
+1000 boids, chưa tối ưu, chưa gắn di chuyển
 
 <!-- ROADMAP -->
 ## Todo
@@ -99,6 +102,7 @@ See the [open issues](https://github.com/NamPhuThuy/Unity-Sample-Boids/issues) f
 ## Acknowledgments
 Helpful resources, credits
 * [GitHub Pages](https://github.com/NamPhuThuy)
+* [Boids Pseudocode](http://www.kfish.org/boids/pseudocode.html)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
